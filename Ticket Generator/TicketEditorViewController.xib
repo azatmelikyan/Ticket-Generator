@@ -28,9 +28,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3aa-xL-0GW">
-                    <rect key="frame" x="8" y="274" width="60" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.020100812986998839" alpha="0.33000000000000002" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="19" y="286" width="62" height="26"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="backButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Cky-uc-d3c"/>
                     </connections>

@@ -43,6 +43,13 @@
 @property (nonatomic) float expirationDateEndX;
 @property (nonatomic) float expirationDateStartY;
 @property (nonatomic) float expirationDateEndY;
+@property (nonatomic) float colorLineStartY;
+@property (nonatomic) float colorLineEndY;
+@property (nonatomic) float colorLineStartX;
+@property (nonatomic) float colorLineEndX;
+@property (nonatomic) float xCoordinateOfColorForColorLineHiderView;
+@property (nonatomic) float yCoordinateOfColorForColorLineHiderView;
+
 
 
 
