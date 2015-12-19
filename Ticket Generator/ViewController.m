@@ -41,6 +41,8 @@
     self.ticketEditor.topText = self.topTextField.text;
     self.ticketEditor.bottomText = self.bottomTextField.text;
     self.ticketEditor.delegate = self;
+    self.ticketEditor.topText = self.topTextField.text;
+    self.ticketEditor.bottomText = self.bottomTextField.text;
     [self presentViewController:self.ticketEditor animated:YES completion:nil];
 }
 
