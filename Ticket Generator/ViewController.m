@@ -36,6 +36,33 @@
 }
 
 - (IBAction)startButtonTouchUpInside:(id)sender {
+    if (self.imageView.image == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please choose screenshot!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    if (!(self.topTextField.text) || self.topTextField.text.length <= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please insert the top text!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    if (!(self.bottomTextField.text) || self.bottomTextField.text.length <= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please insert the bottom text!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     self.ticketEditor = [TicketEditorViewController new];
     self.ticketEditor.ticketImage = self.imageView.image;
     self.ticketEditor.topText = self.topTextField.text;

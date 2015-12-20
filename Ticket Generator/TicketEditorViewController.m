@@ -145,7 +145,7 @@
     
     NSString* fontName = @"HelveticaNeue-Bold";
     [self setUpLabel:_dateInGradientMonthTextLabel withStartX:self.secondGradientStartX startY:self.dateInGradientMonthStartY endX:self.secondGradientEndX endY:self.dateInGradientMonthEndY text:month fontSize:50.0f fontName:fontName];
-    fontName = @"Arial-BoldMT";
+    //fontName = @"Arial-BoldMT";
     [self setUpLabel:_dateInGradientYearTextLabel withStartX:self.secondGradientStartX startY:self.dateInGradientYearStartY endX:self.secondGradientEndX endY:self.dateInGradientYearEndY text:year fontSize:55.0f fontName:fontName];
     [self setUpLabel:_firstTextLabel withStartX:self.firstGradientStartX startY:self.firstTextStartY endX:self.firstGradientEndX endY:self.firstTextEndY text:self.topText fontSize:33.0f fontName:fontName];
     [self setUpLabel:_secondTextLabel withStartX:self.firstGradientStartX startY:self.secondTextStartY endX:self.firstGradientEndX endY:self.secondTextEndY text:self.bottomText fontSize:33.0f fontName:fontName];
@@ -202,9 +202,35 @@
     _currentDateTextLabel.text = time;
     ////
     
+    NSString *secondsStr;
+    NSString *daysStr;
+    NSString *hoursStr;
+    NSString *minutesStr;
     
+    if (seconds < 10) {
+        secondsStr = [NSString stringWithFormat: @"0%ld", (long)seconds];
+    } else {
+        secondsStr = [NSString stringWithFormat: @"%ld", (long)seconds];
+    }
     
-    NSString *countdownText =  [NSString stringWithFormat:@"Expires in %ld : %ld : %ld : %ld", (long)days, (long)hours, (long)minutes, (long)seconds];
+    if (days < 10) {
+        daysStr = [NSString stringWithFormat: @"0%ld", (long)days];
+    } else {
+        daysStr = [NSString stringWithFormat: @"%ld", (long)days];
+    }
+    
+    if (minutes < 10) {
+        minutesStr = [NSString stringWithFormat: @"0%ld", (long)minutes];
+    } else {
+        minutesStr = [NSString stringWithFormat: @"%ld", (long)minutes];
+    }
+    
+    if (hours < 10) {
+        hoursStr = [NSString stringWithFormat: @"0%ld", (long)hours];
+    } else {
+        hoursStr = [NSString stringWithFormat: @"%ld", (long)hours];
+    }
+    NSString *countdownText =  [NSString stringWithFormat:@"Expires in %@ : %@ : %@ : %@", daysStr,hoursStr, minutesStr, secondsStr];
     _expirationDateTextLabel.text = countdownText;
     NSLog(@"timer %@",countdownText);
     [self performSelector:@selector(updateCountdown) withObject:nil afterDelay:1];
@@ -287,6 +313,8 @@
 }
 
 - (IBAction)backButtonTouchUpInside:(id)sender {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateColorLineHiderViewOpaque)  object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateCountdown)  object:nil];
     [self.delegate ticketEditorViewControllerDidFinidh:self];
 }
 
@@ -417,7 +445,7 @@ unsigned int getColorCode (unsigned int byteIndex, unsigned char *imageData)
     unsigned int alpha = imageData[byteIndex + 3];
     
     return (red << 24) | (green << 16) | (blue << 8) | alpha;
-                                          }
+}
 
 /*
 #pragma mark - Navigation
