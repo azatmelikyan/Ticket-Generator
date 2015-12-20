@@ -51,6 +51,15 @@
     
 }
 
+-(void)handleTap:(UITapGestureRecognizer*)sender {
+    [self.view endEditing:YES];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+
 -(void)initializeCordinates {
     float width = 2208;
     float height = 1242;

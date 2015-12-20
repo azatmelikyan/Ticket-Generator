@@ -35,6 +35,15 @@
     [self.view endEditing:YES];
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+// Tell the system It should autorotate
+- (BOOL) shouldAutorotate {
+    return YES;
+}
+
 - (IBAction)screenshotButtonTouchUpInside:(id)sender {
     self.imagePicker = [[LandscapeUIImagePickerController alloc] init];
     self.imagePicker.allowsEditing = NO;
