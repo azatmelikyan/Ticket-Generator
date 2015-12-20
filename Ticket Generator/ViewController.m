@@ -23,7 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
+    self.topTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.bottomTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    UITapGestureRecognizer *tapGesture = [UITapGestureRecognizer new];
+    [tapGesture addTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tapGesture];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)handleTap:(UITapGestureRecognizer*)sender {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)screenshotButtonTouchUpInside:(id)sender {
