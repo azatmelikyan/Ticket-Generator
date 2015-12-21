@@ -10,11 +10,16 @@
 #import "LandscapeUIImagePickerController.h"
 #import "TicketEditorViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, TicketEditorViewControllerDelegate>
+@interface ViewController () <UIImagePickerControllerDelegate, TicketEditorViewControllerDelegate>{
+    
+    NSArray *_pickerData;
+    NSString* _fontName;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong,nonatomic) LandscapeUIImagePickerController* imagePicker;
 @property (strong,nonatomic) TicketEditorViewController* ticketEditor;
+@property (weak, nonatomic) IBOutlet UIPickerView *FontTypePicker;
 
 @end
 
@@ -28,6 +33,11 @@
     UITapGestureRecognizer *tapGesture = [UITapGestureRecognizer new];
     [tapGesture addTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    // Connect data:
+    self.FontTypePicker.delegate = self;
+    self.FontTypePicker.dataSource = self;
+    _pickerData = @[@"HelveticaNeue-Bold", @"Arial-BoldMT", @"AppleSDGothicNeo-SemiBold", @"AppleSDGothicNeo-Bold", @"ArialHebrew-Bold", @"ArialRoundedMTBold", @"AvenirNext-Bold", @"AvenirNext-DemiBold", @"AvenirNextCondensed-Bold", @"TrebuchetMS-Bold"];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -88,6 +98,7 @@
     self.ticketEditor.delegate = self;
     self.ticketEditor.topText = self.topTextField.text;
     self.ticketEditor.bottomText = self.bottomTextField.text;
+    self.ticketEditor.fontName = _fontName;
     [self presentViewController:self.ticketEditor animated:YES completion:nil];
 }
 
@@ -113,6 +124,27 @@
 -(void)ticketEditorViewControllerDidFinidh:(TicketEditorViewController *)controller{
     [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     self.ticketEditor = nil;
+}
+
+
+#pragma Picker
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    _fontName = _pickerData[row];
+    return _fontName;
 }
 
 @end

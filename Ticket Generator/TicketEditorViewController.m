@@ -63,14 +63,14 @@
 -(void)initializeCordinates {
     float width = 2208;
     float height = 1242;
-    self.firstGradientStartX = 25 / width;
+    self.firstGradientStartX = 30 / width;
     self.firstGradientEndX = 740 / width;
     self.secondGradientStartX = 1525 / width;
     self.secondGradientEndX = 2167 / width;
-    self.firstTextStartY = 65 / height;
-    self.firstTextEndY = 160 / height;
-    self.secondTextStartY = 453 / height;
-    self.secondTextEndY = 542 / height;
+    self.firstTextStartY = 56 / height;
+    self.firstTextEndY = 171 / height;
+    self.secondTextStartY = 443 / height;
+    self.secondTextEndY = 552 / height;
     self.dateInGradientMonthStartX = 1678 / width;
     self.dateInGradientMonthEndX = 2015 / width;
     self.dateInGradientMonthStartY = 125 / height;
@@ -152,16 +152,16 @@
     [formatter setDateFormat:@"y"];
     NSString * year = [formatter stringFromDate:date];
     
-    NSString* fontName = @"HelveticaNeue-Bold";
-    [self setUpLabel:_dateInGradientMonthTextLabel withStartX:self.secondGradientStartX startY:self.dateInGradientMonthStartY endX:self.secondGradientEndX endY:self.dateInGradientMonthEndY text:month fontSize:50.0f fontName:fontName];
+    NSString* fontName = self.fontName;//@"HelveticaNeue-Bold";
+    [self setUpLabel:_dateInGradientMonthTextLabel withStartX:self.secondGradientStartX startY:self.dateInGradientMonthStartY endX:self.secondGradientEndX endY:self.dateInGradientMonthEndY text:month fontSize:45.0f fontName:fontName];
     //fontName = @"Arial-BoldMT";
-    [self setUpLabel:_dateInGradientYearTextLabel withStartX:self.secondGradientStartX startY:self.dateInGradientYearStartY endX:self.secondGradientEndX endY:self.dateInGradientYearEndY text:year fontSize:55.0f fontName:fontName];
-    [self setUpLabel:_firstTextLabel withStartX:self.firstGradientStartX startY:self.firstTextStartY endX:self.firstGradientEndX endY:self.firstTextEndY text:self.topText fontSize:33.0f fontName:fontName];
-    [self setUpLabel:_secondTextLabel withStartX:self.firstGradientStartX startY:self.secondTextStartY endX:self.firstGradientEndX endY:self.secondTextEndY text:self.bottomText fontSize:33.0f fontName:fontName];
+    [self setUpLabel:_dateInGradientYearTextLabel withStartX:self.secondGradientStartX startY:self.dateInGradientYearStartY endX:self.secondGradientEndX endY:self.dateInGradientYearEndY text:year fontSize:45.0f fontName:fontName];
+    [self setUpLabel:_firstTextLabel withStartX:self.firstGradientStartX startY:self.firstTextStartY endX:self.firstGradientEndX endY:self.firstTextEndY text:self.topText fontSize:28.0f fontName:fontName];
+    [self setUpLabel:_secondTextLabel withStartX:self.firstGradientStartX startY:self.secondTextStartY endX:self.firstGradientEndX endY:self.secondTextEndY text:self.bottomText fontSize:28.0f fontName:fontName];
     CGFloat w = self.ticketContainerView.bounds.size.width / self.ticketContainerView.bounds.size.width;
-    _currentDateTextLabel = [self setUpLabel:_currentDateTextLabel withStartX:0.0f startY:self.currentDateStartY endX:1.0f endY:self.currentDateEndY text:@"" fontSize:33.0f fontName:fontName];
+    _currentDateTextLabel = [self setUpLabel:_currentDateTextLabel withStartX:0.0f startY:self.currentDateStartY endX:1.0f endY:self.currentDateEndY text:@"" fontSize:28.0f fontName:fontName];
     
-    _expirationDateTextLabel = [self setUpLabel:_expirationDateTextLabel withStartX:0.0f startY:self.expirationDateStartY endX:1.0f endY:self.expirationDateEndY text:@"" fontSize:25.0f fontName:fontName];
+    _expirationDateTextLabel = [self setUpLabel:_expirationDateTextLabel withStartX:0.0f startY:self.expirationDateStartY endX:1.0f endY:self.expirationDateEndY text:@"" fontSize:21.0f fontName:fontName];
     
     [self setUpColorLineHiderView];
     
@@ -265,9 +265,9 @@
     label.center = CGPointMake(cX, cY);
     [label setText:text];
     label.textColor = [UIColor blackColor];
-    //label.textColor = [UIColor redColor];
-    //label.alpha = 0.7;
-    //[label setBackgroundColor:[UIColor blueColor]];
+//    label.textColor = [UIColor redColor];
+//    label.alpha = 0.7;
+//    [label setBackgroundColor:[UIColor blueColor]];
     [label setFont:[UIFont fontWithName: fontName size: fontSize]]; // HelveticaNeue-Bold or Arial-BoldMT
     label.textAlignment = NSTextAlignmentCenter;
     label.autoresizingMask =
@@ -295,10 +295,6 @@
     _colorLineHiderView = [[UILabel alloc] initWithFrame:r];
     _colorLineHiderView.center = CGPointMake(cX, cY);
     _colorLineHiderView.hidden = YES;
-    //[view setText:text];
-    //view.textColor = [UIColor redColor];
-    //view.alpha = 0.7;
-    //[view setBackgroundColor:[UIColor blueColor]];
     UIColor* color = [self getColorForBackgroundOfHiderView:self.ticketImage withCoordinateX:self.xCoordinateOfColorForColorLineHiderView * self.imageWidth andY:self.yCoordinateOfColorForColorLineHiderView * self.imageHeight];
     _colorLineHiderView.backgroundColor = color;
     //[view setFont:[UIFont fontWithName: fontName size: fontSize]]; // HelveticaNeue-Bold or Arial-BoldMT

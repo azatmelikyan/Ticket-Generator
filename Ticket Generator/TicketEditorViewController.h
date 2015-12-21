@@ -19,6 +19,7 @@
 @property (nonatomic) UIImage* ticketImage;
 @property (nonatomic) NSString* topText;
 @property (nonatomic) NSString* bottomText;
+@property (nonatomic) NSString* fontName;
 @property (nonatomic) float firstGradientStartX;
 @property (nonatomic) float firstGradientEndX;
 @property (nonatomic) float secondGradientStartX;
