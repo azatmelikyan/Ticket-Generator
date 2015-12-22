@@ -178,11 +178,11 @@
     [dateFormatter setDateFormat:@"YYYY-MM-dd"];
     NSDate *startingDate = [NSDate date];
     
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *gregorian = [NSCalendar currentCalendar];
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setMonth:1];
     NSDate *nextMonth = [gregorian dateByAddingComponents:offsetComponents toDate:startingDate options:0];
-    NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:nextMonth];
+    NSDateComponents *comp = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:nextMonth];
     [comp setDay:1];
     [comp setHour:14];
     [comp setSecond:1];
@@ -190,7 +190,7 @@
     
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitDay| NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:startingDate toDate:endingDate options:0];
     
     NSInteger days     = [dateComponents day];
@@ -199,17 +199,13 @@
     NSInteger seconds  = [dateComponents second];
     
     
-    //////////
-    /////////
-    /////////
-    // top timer
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        NSDate *date = [NSDate date];
-        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
-        [formatter setDateFormat:@"EEE, MMM dd hh:mm:ss a"];
-        NSString * time = [formatter stringFromDate:date];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    NSDate *date = [NSDate date];
+    [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [formatter setDateFormat:@"EEE, MMM dd hh:mm:ss a"];
+    NSString * time = [formatter stringFromDate:date];
     _currentDateTextLabel.text = time;
-    ////
+    
     
     NSString *secondsStr;
     NSString *daysStr;
@@ -239,11 +235,11 @@
     } else {
         hoursStr = [NSString stringWithFormat: @"%ld", (long)hours];
     }
-    NSString *countdownText =  [NSString stringWithFormat:@"Expires in %@ : %@ : %@ : %@", daysStr,hoursStr, minutesStr, secondsStr];
+    NSString *countdownText =  [NSString stringWithFormat:@"Expires in %@:%@:%@:%@", daysStr,hoursStr, minutesStr, secondsStr];
     _expirationDateTextLabel.text = countdownText;
     NSLog(@"timer %@",countdownText);
     [self performSelector:@selector(updateCountdown) withObject:nil afterDelay:1];
-    // cell.myLabel.text = countdownText;
+   
 }
 
 -(void)updateColorLineHiderViewOpaque{
