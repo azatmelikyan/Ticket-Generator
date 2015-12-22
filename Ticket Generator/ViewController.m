@@ -10,7 +10,7 @@
 #import "LandscapeUIImagePickerController.h"
 #import "TicketEditorViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, TicketEditorViewControllerDelegate>{
+@interface ViewController () <UIImagePickerControllerDelegate, TicketEditorViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>{
     
     NSArray *_pickerData;
     NSString* _fontName;
@@ -45,7 +45,7 @@
     [self.view endEditing:YES];
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscape;
 }
 
@@ -57,38 +57,46 @@
 - (IBAction)screenshotButtonTouchUpInside:(id)sender {
     self.imagePicker = [[LandscapeUIImagePickerController alloc] init];
     self.imagePicker.allowsEditing = NO;
-    self.imagePicker.delegate = self;
-//    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
+    self.imagePicker.delegate = self;    
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
 - (IBAction)startButtonTouchUpInside:(id)sender {
     if (self.imageView.image == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Please choose screenshot!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"Please choose screenshot!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     if (!(self.topTextField.text) || self.topTextField.text.length <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Please insert the top text!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"Please insert the top text!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     if (!(self.bottomTextField.text) || self.bottomTextField.text.length <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Please insert the bottom text!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"Please insert the bottom text!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     self.ticketEditor = [TicketEditorViewController new];
@@ -129,13 +137,13 @@
 
 #pragma Picker
 // The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
 }
 
 // The number of rows of data
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return _pickerData.count;
 }

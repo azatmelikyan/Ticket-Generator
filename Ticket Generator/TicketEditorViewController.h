@@ -51,9 +51,6 @@
 @property (nonatomic) float xCoordinateOfColorForColorLineHiderView;
 @property (nonatomic) float yCoordinateOfColorForColorLineHiderView;
 
-
-
-
 @property (nonatomic) int imageWidth;
 @property (nonatomic) int imageHeight;
 
